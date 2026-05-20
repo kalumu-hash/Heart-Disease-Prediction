@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="result-container">
+
+    <div class="result-card">
+
+        <h1>Heart Disease Prediction</h1>
+
+        <div class="prediction {{ risk_class }}">
+            {{ prediction }}
+        </div>
+ 
+        <p>
+    <strong>Confidence Level:</strong>
+    {{ confidence }}%
+      </p>
+        <div class="details">
+
+            <p>
+                <strong>Blood Pressure:</strong>
+                {{ systolic_bp }}/{{ diastolic_bp }} mm Hg
+            </p>
+
+        <div class="note">
+          For professional medical advice, consult a healthcare provider.
+       </div>   
+
+        <br>
+
+        <a href="/" class="btn"> 
+          Check Another Patient
+        </a>
+
+        <br><br>
+
+      <br><br>
+
+     <a href="/download-report" class="btn">
+    Download PDF Report 
+     </a>
+    <a href="/logout" class="logout-btn"> 
+
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

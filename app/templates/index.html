@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Heart Disease Predictor</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<h2>Heart Disease Prediction System</h2>
+
+<!-- Logout button -->
+<div style="text-align:center; margin-bottom:20px;">
+
+    <a href="/logout" class="btn logout-btn">
+        Logout
+    </a>
+
+</div>
+
+
+<form id="predictForm"
+      method="POST"
+      action="/predict"
+      onsubmit="return showLoading()">
+
+    <label>Age:</label>
+
+    <input type="number"
+           name="age"
+           min="18"
+           max="90"
+           placeholder="28"
+           required>
+
+    <br><br>
+
+
+    <label>Sex:</label>
+
+    <select name="sex" required>
+
+        <option value="1">Male</option>
+
+        <option value="0">Female</option>
+
+    </select>
+
+    <br><br>
+
+
+    <label>Do you experience chest pain?</label>
+
+    <select name="cp" required>
+
+        <option value="0">No chest pain</option>
+
+        <option value="1">
+            Mild discomfort during physical activity
+        </option>
+
+        <option value="2">
+            Chest pain not related to exercise
+        </option>
+
+        <option value="3">
+            Frequent or severe chest pain
+        </option>
+
+    </select>
+
+    <br><br>
+
+
+    <label>Systolic Blood Pressure (mm Hg):</label>
+
+    <input type="number"
+           name="systolic_bp"
+           min="70"
+           max="250"
+           placeholder="113"
+           required>
+
+    <br><br>
+
+
+    <label>Diastolic Blood Pressure (mm Hg):</label>
+
+    <input type="number"
+           name="diastolic_bp"
+           min="40"
+           max="150"
+           placeholder="72"
+           required>
+
+    <br><br>
+
+
+    <!-- CHOLESTEROL -->
+    <label>Cholesterol Level (mg/dL):</label>
+
+    <input
+        type="number"
+        name="chol"
+        min="100"
+        max="700"
+        id="cholesterol_input"
+        placeholder="e.g. 200"
+    >
+
+    <br><br>
+
+
+    <label>
+
+        <input
+            type="checkbox"
+            id="unknown_chol"
+            name="unknown_chol"
+            value="yes"
+            onclick="toggleCholesterol()"
+        >
+
+        I don't know my cholesterol level
+
+    </label>
+
+    <br><br>
+
+
+    <label>Fasting Blood Sugar:</label>
+
+    <select name="fbs" required>
+
+        <option value="0">
+            Normal / I don't know
+        </option>
+
+        <option value="1">
+            High (diagnosed by doctor)
+        </option>
+
+    </select>
+
+    <br><br>
+
+
+    <label>Resting ECG:</label>
+
+    <select name="restecg" required>
+
+        <option value="0">
+            Normal / I don't know
+        </option>
+
+        <option value="1">
+            Abnormal (diagnosed by doctor)
+        </option>
+
+    </select>
+
+    <br><br>
+
+
+    <label>
+        Do you feel chest pain or discomfort during physical activity
+        (walking, climbing stairs, exercise)?
+    </label>
+
+    <select name="exang" required>
+
+        <option value="0">No</option>
+
+        <option value="1">Yes</option>
+
+    </select>
+
+    <br><br>
+
+
+    <label>Maximum Heart Rate:</label>
+
+    <input
+        type="number"
+        name="thalach"
+        min="60"
+        max="220"
+        placeholder="e.g. 170"
+        required
+    >
+
+    <br><br>
+
+
+    <label>ST Slope:</label>
+
+    <select name="slope" required>
+
+        <option value="1">Upsloping</option>
+
+        <option value="2">Flat</option>
+
+        <option value="3">Downsloping</option>
+
+    </select>
+
+    <br><br>
+
+
+    <!-- Loading animation -->
+    <div id="loading"
+         style="display:none; text-align:center; margin-top:20px;">
+
+        <div class="spinner"></div>
+
+        <p>Analyzing patient data...</p>
+
+    </div>
+
+
+    <input
+        type="submit"
+        value="Predict"
+        id="submitBtn"
+    >
+
+</form>
+
+
+<!-- Confidentiality notice -->
+<div class="note"
+     style="text-align:center; margin:25px;">
+
+    Patient information is kept confidential
+    and used only for prediction purposes.
+
+</div>
+
+
+<script>
+
+function toggleCholesterol() {
+
+    const checkbox =
+        document.getElementById("unknown_chol");
+
+    const input =
+        document.getElementById("cholesterol_input");
+
+    if (checkbox.checked) {
+
+        input.value = "";
+
+        input.disabled = true;
+
+    }
+
+    else {
+
+        input.disabled = false;
+    }
+}
+
+
+function showLoading() {
+
+    document.getElementById("loading").style.display = "block";
+
+    document.getElementById("submitBtn").disabled = true;
+
+    return true;
+}
+
+</script>
+
+</body>
+</html>
