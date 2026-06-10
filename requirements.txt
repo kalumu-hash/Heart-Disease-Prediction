@@ -1,0 +1,12 @@
+Flask
+gunicorn
+joblib
+numpy
+pandas
+jupyter_client
+notebook
+scikit-learn
+scipy
+matplotlib
+ipykernel
+ipython
